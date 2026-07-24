@@ -1,0 +1,138 @@
+:root {
+    --sgoc-orange: #f97300;
+    --sgoc-orange-strong: #ff8a00;
+    --sgoc-panel: rgba(17, 24, 39, 0.92);
+    --sgoc-border: rgba(148, 163, 184, 0.16);
+}
+
+/* LOGIN PREMIUM */
+.fi-simple-layout {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top right, rgba(249, 115, 0, 0.17), transparent 34%),
+        radial-gradient(circle at bottom left, rgba(249, 115, 0, 0.10), transparent 30%),
+        linear-gradient(135deg, #07090d 0%, #0b0f16 45%, #111827 100%);
+}
+
+.fi-simple-layout::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.24;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 42px 42px;
+}
+
+.fi-simple-main {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 30rem);
+    padding: 2rem;
+    border: 1px solid var(--sgoc-border);
+    border-radius: 1.5rem;
+    background: rgba(13, 17, 23, 0.86);
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.50);
+    backdrop-filter: blur(18px);
+}
+
+.fi-simple-header {
+    margin-bottom: 1.5rem;
+}
+
+.fi-simple-header .fi-logo {
+    height: 3.6rem !important;
+    max-width: 16rem;
+}
+
+.fi-simple-header-heading {
+    font-size: 1.65rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+.fi-simple-header-subheading {
+    color: #94a3b8;
+}
+
+.fi-btn.fi-color-primary {
+    background: linear-gradient(135deg, var(--sgoc-orange-strong), var(--sgoc-orange));
+    border: 0;
+    box-shadow: 0 10px 30px rgba(249, 115, 0, 0.22);
+}
+
+.fi-btn.fi-color-primary:hover {
+    filter: brightness(1.06);
+}
+
+/* EMPRESA ATUAL NA BARRA SUPERIOR */
+.sgoc-current-company {
+    display: flex;
+    flex-direction: column;
+    min-width: 12rem;
+    padding: .35rem .85rem;
+    margin-inline-start: .4rem;
+    border-inline-start: 1px solid rgba(148, 163, 184, .18);
+    line-height: 1.12;
+}
+
+.sgoc-current-company__label {
+    color: #94a3b8;
+    font-size: .68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+
+.sgoc-current-company__name {
+    margin-top: .2rem;
+    color: #f8fafc;
+    font-size: .88rem;
+    font-weight: 800;
+    max-width: 24rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* IDENTIDADE DO PAINEL */
+.fi-sidebar-header {
+    border-bottom: 1px solid rgba(148, 163, 184, .12);
+}
+
+.fi-sidebar-header .fi-logo {
+    height: 2.9rem !important;
+}
+
+.fi-topbar {
+    border-bottom-color: rgba(148, 163, 184, .12);
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-button {
+    background: linear-gradient(90deg, rgba(249, 115, 0, .17), rgba(249, 115, 0, .04));
+    box-shadow: inset 3px 0 0 var(--sgoc-orange);
+}
+
+.fi-sidebar-item.fi-active .fi-sidebar-item-label,
+.fi-sidebar-item.fi-active .fi-icon {
+    color: #ff9700;
+}
+
+.fi-section,
+.fi-ta-ctn,
+.fi-tabs {
+    border-color: rgba(148, 163, 184, .13);
+}
+
+@media (max-width: 1024px) {
+    .sgoc-current-company {
+        display: none;
+    }
+
+    .fi-simple-main {
+        width: calc(100% - 2rem);
+        padding: 1.35rem;
+    }
+}

@@ -1,0 +1,46 @@
+
+/* SGOC ERP — ajustes corporativos do painel */
+.fi-main {
+    max-width: none !important;
+}
+
+.fi-page,
+.fi-page-content {
+    width: 100%;
+}
+
+.fi-sc-tabs {
+    overflow-x: auto;
+}
+
+.fi-section {
+    border-radius: 0.9rem;
+}
+
+.fi-fo-field-wrp {
+    min-width: 0;
+}
+
+.fi-input-wrp input,
+.fi-input-wrp select,
+.fi-input-wrp textarea {
+    min-width: 0;
+}
+
+@media (min-width: 1280px) {
+    .fi-main {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .fi-page-content {
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 1536px) {
+    .fi-main {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+}

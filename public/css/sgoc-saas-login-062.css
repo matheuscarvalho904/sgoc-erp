@@ -1,0 +1,289 @@
+.fi-simple-layout {
+    display: block !important;
+    min-height: 100vh;
+    padding: 0 !important;
+    background: #0b0f15;
+}
+
+.fi-simple-main {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 100vh;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.fi-simple-header {
+    display: none !important;
+}
+
+.sgoc-saas-login-shell {
+    display: grid;
+    grid-template-columns: minmax(26rem, 46%) minmax(34rem, 54%);
+    min-height: 100vh;
+}
+
+.sgoc-saas-login-brand {
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 2rem 4.5rem 2.25rem;
+    color: #fff;
+    background:
+        linear-gradient(90deg, rgba(5, 8, 12, .98), rgba(8, 12, 18, .88)),
+        radial-gradient(circle at 72% 48%, rgba(249, 115, 0, .18), transparent 30rem),
+        #090d13;
+}
+
+.sgoc-saas-login-brand::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: .65;
+    pointer-events: none;
+    background:
+        linear-gradient(145deg, transparent 0 58%, rgba(249, 115, 0, .08) 58.2% 58.5%, transparent 58.8%),
+        repeating-linear-gradient(115deg, transparent 0 42px, rgba(249,115,0,.035) 43px, transparent 44px);
+}
+
+.sgoc-saas-login-brand > * {
+    position: relative;
+    z-index: 1;
+}
+
+.sgoc-saas-login-brand__logo {
+    width: 13.5rem;
+    height: auto;
+}
+
+.sgoc-saas-login-brand__content {
+    display: flex;
+    max-width: 34rem;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 2rem;
+}
+
+.sgoc-saas-login-brand__eyebrow {
+    margin: 0;
+    color: #e2e8f0;
+    font-size: 1.35rem;
+}
+
+.sgoc-saas-login-brand__title {
+    margin: .3rem 0 1rem;
+    font-size: clamp(3.2rem, 6vw, 5.2rem);
+    line-height: .98;
+    font-weight: 900;
+    letter-spacing: -.055em;
+}
+
+.sgoc-saas-login-brand__title span {
+    color: #ff8500;
+}
+
+.sgoc-saas-login-brand__description {
+    max-width: 30rem;
+    color: #cbd5e1;
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.sgoc-saas-login-benefits {
+    display: grid;
+    gap: 1.2rem;
+    margin-top: 2.4rem;
+}
+
+.sgoc-saas-login-benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.sgoc-saas-login-benefit svg {
+    width: 1.65rem;
+    height: 1.65rem;
+    flex: 0 0 auto;
+    color: #ff8500;
+}
+
+.sgoc-saas-login-benefit div {
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+}
+
+.sgoc-saas-login-benefit strong {
+    font-size: .95rem;
+}
+
+.sgoc-saas-login-benefit span {
+    max-width: 27rem;
+    color: #94a3b8;
+    font-size: .82rem;
+    line-height: 1.45;
+}
+
+.sgoc-saas-login-brand__footer {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    color: #94a3b8;
+    font-size: .72rem;
+}
+
+.sgoc-saas-login-form-area {
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 3rem;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 88% 12%, rgba(249, 115, 0, .07), transparent 22rem),
+        linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+}
+
+.sgoc-saas-login-form-area::before,
+.sgoc-saas-login-form-area::after {
+    content: "";
+    position: absolute;
+    width: 28rem;
+    height: 28rem;
+    border: 1px solid rgba(249, 115, 0, .14);
+    border-radius: 50%;
+}
+
+.sgoc-saas-login-form-area::before {
+    top: -17rem;
+    right: -12rem;
+}
+
+.sgoc-saas-login-form-area::after {
+    right: -15rem;
+    bottom: -18rem;
+}
+
+.sgoc-saas-login-form-card {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 31rem);
+    padding: 2.8rem 2.2rem 2.2rem;
+    border: 1px solid rgba(15, 23, 42, .08);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, .96);
+    box-shadow: 0 24px 70px rgba(15, 23, 42, .11);
+}
+
+.sgoc-saas-login-form-card__header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.sgoc-saas-login-form-card__header h2 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: -.035em;
+}
+
+.sgoc-saas-login-form-card__header p {
+    margin: .45rem 0 0;
+    color: #64748b;
+    font-size: .92rem;
+}
+
+.sgoc-saas-login-form-card .fi-fo-field-wrp-label {
+    color: #0f172a;
+    font-weight: 800;
+}
+
+.sgoc-saas-login-form-card .fi-input-wrp {
+    min-height: 3.15rem;
+    border-radius: .4rem;
+    background: #fff;
+}
+
+.sgoc-saas-login-form-card .fi-input {
+    color: #0f172a;
+}
+
+.sgoc-saas-login-form-card .fi-btn.fi-color-primary {
+    min-height: 3.1rem;
+    border-radius: .4rem;
+    border: 0;
+    color: #fff;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ff9700, #f97300);
+    box-shadow: 0 12px 28px rgba(249, 115, 0, .22);
+}
+
+.sgoc-saas-login-security {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: min(100%, 34rem);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2.2rem;
+    color: #475569;
+}
+
+.sgoc-saas-login-security > div {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+}
+
+.sgoc-saas-login-security svg {
+    width: 1.35rem;
+    height: 1.35rem;
+    flex: 0 0 auto;
+}
+
+.sgoc-saas-login-security span {
+    display: flex;
+    flex-direction: column;
+    font-size: .65rem;
+    line-height: 1.2;
+}
+
+.sgoc-saas-login-security strong {
+    color: #1e293b;
+    font-size: .72rem;
+}
+
+@media (max-width: 1050px) {
+    .sgoc-saas-login-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .sgoc-saas-login-brand {
+        display: none;
+    }
+
+    .sgoc-saas-login-form-area {
+        padding: 1.25rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .sgoc-saas-login-form-card {
+        padding: 2rem 1.25rem;
+    }
+
+    .sgoc-saas-login-security {
+        grid-template-columns: 1fr;
+    }
+}

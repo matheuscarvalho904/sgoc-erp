@@ -1,0 +1,25 @@
+.fi-wi-stats-overview-stat {
+    border-radius: .9rem;
+    border-color: rgba(148, 163, 184, .12);
+    background:
+        linear-gradient(145deg, rgba(255,255,255,.025), transparent),
+        rgba(20, 23, 29, .96);
+}
+
+.fi-wi-stats-overview-stat:hover {
+    border-color: rgba(249, 115, 0, .28);
+    transform: translateY(-1px);
+    transition: all .18s ease;
+}
+
+.fi-wi-chart,
+.fi-wi-table {
+    border-radius: .9rem;
+    border-color: rgba(148, 163, 184, .12);
+}
+
+.fi-wi-stats-overview-stat-value {
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: -.035em;
+}

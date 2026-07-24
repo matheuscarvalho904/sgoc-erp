@@ -1,0 +1,204 @@
+:root {
+    --sgoc-orange: #f97300;
+    --sgoc-orange-2: #ff9800;
+    --sgoc-bg: #090c12;
+    --sgoc-card: rgba(18, 23, 32, .96);
+    --sgoc-border: rgba(148, 163, 184, .16);
+}
+
+/* Login SaaS com linguagem visual inspirada em portais corporativos modernos */
+.fi-simple-layout {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 8% 18%, rgba(249, 115, 0, .18), transparent 28rem),
+        radial-gradient(circle at 92% 82%, rgba(37, 99, 235, .10), transparent 30rem),
+        linear-gradient(145deg, #06080c 0%, #0a0f17 48%, #111827 100%);
+}
+
+.fi-simple-layout::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to bottom, black, transparent 92%);
+}
+
+.fi-simple-main {
+    position: relative;
+    z-index: 1;
+    width: min(calc(100% - 2rem), 29rem);
+    padding: 2.25rem;
+    border: 1px solid var(--sgoc-border);
+    border-radius: .6rem;
+    background: var(--sgoc-card);
+    box-shadow:
+        0 34px 90px rgba(0,0,0,.52),
+        0 0 0 1px rgba(255,255,255,.025) inset;
+    backdrop-filter: blur(20px);
+}
+
+.fi-simple-header {
+    margin-bottom: 1.7rem;
+    text-align: left;
+    align-items: flex-start;
+}
+
+.fi-simple-header .fi-logo {
+    height: 3.25rem !important;
+    max-width: 15.5rem;
+    margin-bottom: 1.1rem;
+}
+
+.fi-simple-header-heading {
+    font-size: 1.75rem;
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -.035em;
+}
+
+.fi-simple-header-subheading {
+    max-width: 24rem;
+    color: #94a3b8;
+    line-height: 1.55;
+    text-align: left;
+}
+
+.fi-simple-main .fi-fo-field-wrp-label {
+    font-weight: 700;
+}
+
+.fi-simple-main .fi-input-wrp {
+    min-height: 3rem;
+    border-radius: .45rem;
+}
+
+.fi-simple-main .fi-btn.fi-color-primary {
+    min-height: 3rem;
+    border: 0;
+    border-radius: .45rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--sgoc-orange-2), var(--sgoc-orange));
+    box-shadow: 0 12px 32px rgba(249,115,0,.24);
+}
+
+.fi-simple-main .fi-btn.fi-color-primary:hover {
+    filter: brightness(1.07);
+}
+
+.sgoc-login-trust {
+    display: grid;
+    gap: .7rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(148, 163, 184, .12);
+}
+
+.sgoc-login-trust__item {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    color: #94a3b8;
+    font-size: .78rem;
+}
+
+.sgoc-login-trust__item svg {
+    width: 1rem;
+    height: 1rem;
+    flex: 0 0 auto;
+    color: var(--sgoc-orange-2);
+}
+
+/* Empresa no lado direito da barra superior */
+.sgoc-company-right {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    max-width: 21rem;
+    min-width: 0;
+    margin-inline-start: auto;
+    margin-inline-end: .85rem;
+    padding: .35rem .8rem;
+    border: 1px solid rgba(148, 163, 184, .13);
+    border-radius: .65rem;
+    background: rgba(255,255,255,.025);
+}
+
+.sgoc-company-right__icon {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    flex: 0 0 auto;
+    border-radius: .5rem;
+    color: #ff9700;
+    background: rgba(249, 115, 0, .11);
+}
+
+.sgoc-company-right__icon svg {
+    width: 1.15rem;
+    height: 1.15rem;
+}
+
+.sgoc-company-right__text {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    line-height: 1.08;
+}
+
+.sgoc-company-right__label {
+    color: #94a3b8;
+    font-size: .61rem;
+    font-weight: 800;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+}
+
+.sgoc-company-right__name {
+    max-width: 16rem;
+    margin-top: .22rem;
+    overflow: hidden;
+    color: #f8fafc;
+    font-size: .82rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Oculta a versão antiga, caso ainda esteja registrada */
+.sgoc-current-company {
+    display: none !important;
+}
+
+@media (max-width: 1100px) {
+    .sgoc-company-right {
+        max-width: 14rem;
+    }
+
+    .sgoc-company-right__name {
+        max-width: 10rem;
+    }
+}
+
+@media (max-width: 850px) {
+    .sgoc-company-right {
+        display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .fi-simple-main {
+        width: calc(100% - 1.25rem);
+        padding: 1.4rem;
+        border-radius: .65rem;
+    }
+
+    .fi-simple-header-heading {
+        font-size: 1.5rem;
+    }
+}

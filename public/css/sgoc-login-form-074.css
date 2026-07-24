@@ -1,0 +1,97 @@
+/* SGOC ERP — Login Premium 0.7.4 */
+.sgoc-saas-login-form-card {
+    width: min(100%, 34rem);
+    padding: 2.7rem 2.4rem 2.35rem;
+}
+.sgoc-saas-login-form-card__header { margin-bottom: 2rem; }
+.sgoc-saas-login-form-card__header h2 {
+    color: #0f172a !important;
+    font-size: 2rem;
+    line-height: 1.15;
+}
+.sgoc-saas-login-form-card__header p {
+    color: #64748b !important;
+    font-size: .96rem;
+}
+.sgoc-saas-login-form-card .fi-fo-field-wrp-label,
+.sgoc-saas-login-form-card .fi-fo-field-wrp-label span,
+.sgoc-saas-login-form-card label,
+.sgoc-saas-login-form-card .fi-checkbox-label,
+.sgoc-saas-login-form-card .fi-fo-checkbox-list-option-label {
+    color: #0f172a !important;
+}
+.sgoc-saas-login-form-card .fi-fo-field-wrp-label {
+    display: inline-flex;
+    margin-bottom: .5rem;
+    font-size: .9rem;
+    font-weight: 800;
+}
+.sgoc-saas-login-form-card .fi-fo-field-wrp-label-required-mark {
+    color: #ef4444 !important;
+}
+.sgoc-saas-login-form-card .fi-input-wrp {
+    min-height: 3.35rem;
+    border: 1px solid #d8dee8 !important;
+    border-radius: .55rem !important;
+    background: #ffffff !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, .03) !important;
+}
+.sgoc-saas-login-form-card .fi-input-wrp:focus-within {
+    border-color: #f97300 !important;
+    box-shadow: 0 0 0 3px rgba(249, 115, 0, .12) !important;
+}
+.sgoc-saas-login-form-card .fi-input {
+    min-height: 3.2rem;
+    padding-inline: .95rem;
+    color: #0f172a !important;
+    font-size: .96rem;
+}
+.sgoc-saas-login-form-card .fi-input::placeholder {
+    color: #94a3b8 !important;
+}
+.sgoc-saas-login-form-card .fi-input-wrp-icon {
+    color: #64748b !important;
+}
+.sgoc-saas-login-form-card .fi-fo-field-wrp-helper-text,
+.sgoc-saas-login-form-card .fi-fo-field-wrp-hint,
+.sgoc-saas-login-form-card .fi-fo-field-wrp-error-message {
+    font-size: .78rem;
+}
+.sgoc-saas-login-form-card .fi-fo-field-wrp-helper-text,
+.sgoc-saas-login-form-card .fi-fo-field-wrp-hint {
+    color: #64748b !important;
+}
+.sgoc-saas-login-form-card .fi-fo-field-wrp-error-message {
+    color: #dc2626 !important;
+}
+.sgoc-saas-login-form-card .fi-checkbox-input {
+    width: 1.05rem;
+    height: 1.05rem;
+    border-color: #cbd5e1 !important;
+    background: #fff !important;
+}
+.sgoc-saas-login-form-card .fi-checkbox-input:checked {
+    border-color: #f97300 !important;
+    background: #f97300 !important;
+}
+.sgoc-saas-login-form-card .fi-checkbox-label {
+    font-size: .86rem;
+    font-weight: 600;
+}
+.sgoc-login-submit {
+    width: 100%;
+    min-height: 3.25rem;
+    margin-top: .25rem;
+    justify-content: center;
+    border-radius: .55rem !important;
+    font-size: .95rem;
+    font-weight: 900;
+}
+.sgoc-saas-login-security {
+    width: min(100%, 36rem);
+    margin-top: 1.75rem;
+}
+@media (max-width: 640px) {
+    .sgoc-saas-login-form-card { padding: 2rem 1.25rem; }
+    .sgoc-saas-login-form-card__header h2 { font-size: 1.65rem; }
+}
