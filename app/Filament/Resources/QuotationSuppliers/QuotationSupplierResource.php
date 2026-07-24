@@ -9,12 +9,18 @@ use App\Filament\Resources\QuotationSuppliers\Pages\EditQuotationSupplier;
 use App\Filament\Resources\QuotationSuppliers\Pages\ListQuotationSuppliers;
 use App\Modules\Foundation\Domain\Models\Tenant;
 use App\Modules\Purchasing\Domain\Models\QuotationRequest;
+use App\Modules\Purchasing\Application\Actions\GeneratePurchaseOrderFromWinner;
+use App\Modules\Purchasing\Application\Actions\RecalculateQuotationSupplier;
+use App\Modules\Purchasing\Application\Actions\SelectQuotationWinner;
 use App\Modules\Purchasing\Domain\Models\QuotationSupplier;
 use App\Modules\Purchasing\Domain\Models\Supplier;
 use BackedEnum;
+use DomainException;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Notifications\Notification;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
@@ -84,7 +90,44 @@ final class QuotationSupplierResource extends Resource
             TextColumn::make('status')->label('Status')->badge()->formatStateUsing(fn(string $s)=>match($s){'invited'=>'Convidado','viewed'=>'Visualizada','answered'=>'Respondida','declined'=>'Recusada','disqualified'=>'Desclassificada','winner'=>'Vencedora',default=>$s})->color(fn(string $s)=>match($s){'winner'=>'success','declined','disqualified'=>'danger','answered'=>'info','viewed'=>'warning',default=>'gray'}),
         ])->filters([
             SelectFilter::make('status')->label('Status')->options(['invited'=>'Convidado','viewed'=>'Visualizada','answered'=>'Respondida','declined'=>'Recusada','disqualified'=>'Desclassificada','winner'=>'Vencedora']),
-        ])->recordActions([EditAction::make()->label('Editar')])
+        ])->recordActions([
+            Action::make('recalculate')
+                ->label('Recalcular')
+                ->icon('heroicon-o-calculator')
+                ->action(function (QuotationSupplier $record): void {
+                    app(RecalculateQuotationSupplier::class)->execute($record);
+                    Notification::make()->title('Totais recalculados com sucesso.')->success()->send();
+                }),
+            Action::make('winner')
+                ->label('Definir vencedora')
+                ->icon('heroicon-o-trophy')
+                ->color('success')
+                ->requiresConfirmation()
+                ->visible(fn (QuotationSupplier $record): bool => ! $record->is_winner)
+                ->action(function (QuotationSupplier $record): void {
+                    try {
+                        app(SelectQuotationWinner::class)->execute($record);
+                        Notification::make()->title('Proposta definida como vencedora.')->success()->send();
+                    } catch (DomainException $exception) {
+                        Notification::make()->title('Não foi possível concluir')->body($exception->getMessage())->danger()->send();
+                    }
+                }),
+            Action::make('generatePurchaseOrder')
+                ->label('Gerar pedido')
+                ->icon('heroicon-o-shopping-cart')
+                ->color('primary')
+                ->requiresConfirmation()
+                ->visible(fn (QuotationSupplier $record): bool => $record->is_winner && $record->status === 'winner')
+                ->action(function (QuotationSupplier $record): void {
+                    try {
+                        $order = app(GeneratePurchaseOrderFromWinner::class)->execute($record, auth()->id());
+                        Notification::make()->title('Pedido de compra gerado.')->body($order->number)->success()->send();
+                    } catch (DomainException $exception) {
+                        Notification::make()->title('Não foi possível gerar o pedido')->body($exception->getMessage())->danger()->send();
+                    }
+                }),
+            EditAction::make()->label('Editar'),
+        ])
           ->toolbarActions([BulkActionGroup::make([DeleteBulkAction::make()->label('Excluir selecionadas')])])
           ->defaultSort('created_at','desc');
     }

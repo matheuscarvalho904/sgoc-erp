@@ -17,12 +17,12 @@ final class Supplier extends BaseModel
         'tenant_id', 'organization_id', 'code', 'person_type', 'document', 'legal_name',
         'trade_name', 'state_registration', 'municipal_registration', 'email', 'phone',
         'zip_code', 'street', 'number', 'complement', 'district', 'city', 'state',
-        'payment_notes', 'status', 'settings',
+        'payment_notes', 'status', 'settings', 'external_data', 'external_data_synced_at',
     ];
 
     protected function casts(): array
     {
-        return [...parent::casts(), 'settings' => 'array'];
+        return [...parent::casts(), 'settings' => 'array', 'external_data' => 'array', 'external_data_synced_at' => 'immutable_datetime'];
     }
 
     public function tenant(): BelongsTo { return $this->belongsTo(Tenant::class); }

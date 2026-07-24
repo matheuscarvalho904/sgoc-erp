@@ -1,0 +1,1 @@
+<?php namespace App\Filament\Resources\MaintenanceTypes\Pages; use App\Filament\Resources\MaintenanceTypes\MaintenanceTypeResource; use Filament\Resources\Pages\EditRecord; final class EditMaintenanceType extends EditRecord { protected static string $resource=MaintenanceTypeResource::class; }

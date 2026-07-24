@@ -1,0 +1,5 @@
+<?php
+declare(strict_types=1);
+namespace App\Modules\Maintenance\Domain\Models;
+use App\Modules\Assets\Domain\Models\Asset; use App\Shared\Models\BaseModel; use Illuminate\Database\Eloquent\Relations\BelongsTo;
+final class WorkOrder extends BaseModel { protected $table='maintenance.work_orders'; protected $guarded=[]; protected function casts(): array { return [...parent::casts(),'opened_at'=>'datetime','scheduled_at'=>'datetime','started_at'=>'datetime','completed_at'=>'datetime','entry_hourmeter'=>'decimal:2','exit_hourmeter'=>'decimal:2','entry_odometer'=>'decimal:2','exit_odometer'=>'decimal:2','estimated_cost'=>'decimal:4','actual_cost'=>'decimal:4','metadata'=>'array']; } public function asset(): BelongsTo { return $this->belongsTo(Asset::class); } public function maintenanceType(): BelongsTo { return $this->belongsTo(MaintenanceType::class); } public function priority(): BelongsTo { return $this->belongsTo(MaintenancePriority::class,'priority_id'); } public function workshop(): BelongsTo { return $this->belongsTo(Workshop::class); } }

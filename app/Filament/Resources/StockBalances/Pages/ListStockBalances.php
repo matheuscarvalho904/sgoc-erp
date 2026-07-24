@@ -1,0 +1,1 @@
+<?php namespace App\Filament\Resources\StockBalances\Pages; use App\Filament\Resources\StockBalances\StockBalanceResource; use Filament\Resources\Pages\ListRecords; final class ListStockBalances extends ListRecords { protected static string $resource=StockBalanceResource::class; }

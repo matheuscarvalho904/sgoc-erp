@@ -1,0 +1,1 @@
+<?php namespace App\Filament\Resources\WorkOrders\Pages; use App\Filament\Resources\WorkOrders\WorkOrderResource; use Filament\Resources\Pages\ListRecords; final class ListWorkOrders extends ListRecords { protected static string $resource=WorkOrderResource::class; protected function getHeaderActions(): array { return [\Filament\Actions\CreateAction::make()->label('Nova OS')]; } }

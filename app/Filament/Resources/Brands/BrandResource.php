@@ -1,0 +1,28 @@
+<?php
+ declare(strict_types=1);
+ namespace App\Filament\Resources\Brands;
+ use App\Modules\Catalog\Domain\Models\Brand;
+ use App\Modules\Foundation\Domain\Models\Tenant;
+ use App\Filament\Resources\Brands\Pages\CreateBrand; use App\Filament\Resources\Brands\Pages\EditBrand; use App\Filament\Resources\Brands\Pages\ListBrands;
+ use BackedEnum; use UnitEnum; use Filament\Resources\Resource; use Filament\Schemas\Schema; use Filament\Schemas\Components\Section;
+ use Filament\Forms\Components\Hidden; use Filament\Forms\Components\TextInput; use Filament\Forms\Components\Textarea; use Filament\Forms\Components\Select; use Filament\Forms\Components\Toggle;
+ use Filament\Tables\Table; use Filament\Tables\Columns\TextColumn; use Filament\Tables\Columns\IconColumn; use Filament\Actions\EditAction;
+ final class BrandResource extends Resource {
+  protected static ?string $model=Brand::class; protected static ?string $recordTitleAttribute='name';
+  protected static ?string $modelLabel='marca'; protected static ?string $pluralModelLabel='marcas'; protected static ?string $navigationLabel='Marcas';
+  protected static string|BackedEnum|null $navigationIcon='heroicon-o-building-storefront'; protected static string|UnitEnum|null $navigationGroup='Cadastros Gerais'; protected static ?int $navigationSort=20;
+  public static function form(Schema $schema): Schema { return $schema->columns(1)->components([Hidden::make('tenant_id')->default(fn()=>Tenant::query()->value('id'))->required(),Section::make('Marca')->columnSpanFull()->columns(['default'=>1,'md'=>2,'xl'=>4])->schema([
+                    TextInput::make('code')->label('Código')->required()->maxLength(180),
+                    TextInput::make('name')->label('Nome')->required()->maxLength(180),
+                    TextInput::make('manufacturer_name')->label('Fabricante')->required()->maxLength(180),
+                    TextInput::make('website')->label('Site')->required()->maxLength(180),
+                    Select::make('status')->label('Status')->options(['active'=>'Ativo','inactive'=>'Inativo'])->default('active')->required(),
+  ])]); }
+  public static function table(Table $table): Table { return $table->columns([
+            TextColumn::make('code')->label('Código')->searchable()->sortable(),
+            TextColumn::make('name')->label('Nome')->searchable()->sortable(),
+            TextColumn::make('manufacturer_name')->label('Fabricante')->searchable()->sortable(),
+            TextColumn::make('website')->label('Site')->searchable()->sortable(),
+  ])->recordActions([EditAction::make()->label('Editar')]); }
+  public static function getPages(): array { return ['index'=>ListBrands::route('/'),'create'=>CreateBrand::route('/criar'),'edit'=>EditBrand::route('/{record}/editar')]; }
+ }

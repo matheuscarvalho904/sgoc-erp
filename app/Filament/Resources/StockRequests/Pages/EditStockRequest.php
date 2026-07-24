@@ -1,0 +1,1 @@
+<?php namespace App\Filament\Resources\StockRequests\Pages; use App\Filament\Resources\StockRequests\StockRequestResource; use Filament\Resources\Pages\EditRecord; final class EditStockRequest extends EditRecord { protected static string $resource=StockRequestResource::class; }
