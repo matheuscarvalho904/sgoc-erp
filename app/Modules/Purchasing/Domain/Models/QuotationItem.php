@@ -6,10 +6,10 @@ namespace App\Modules\Purchasing\Domain\Models;
 
 use App\Modules\Foundation\Domain\Models\Tenant;
 use App\Modules\Purchasing\Application\Actions\RecalculateQuotationSupplier;
-use App\Shared\Models\BaseModel;
+use App\Shared\Models\TransactionModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-final class QuotationItem extends BaseModel
+final class QuotationItem extends TransactionModel
 {
     protected $table = 'purchasing.quotation_items';
 

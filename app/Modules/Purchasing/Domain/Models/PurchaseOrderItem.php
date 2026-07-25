@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Modules\Purchasing\Domain\Models;
 
 use App\Modules\Foundation\Domain\Models\Tenant;
-use App\Shared\Models\BaseModel;
+use App\Shared\Models\TransactionModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-final class PurchaseOrderItem extends BaseModel
+final class PurchaseOrderItem extends TransactionModel
 {
     protected $table = 'purchasing.purchase_order_items';
 

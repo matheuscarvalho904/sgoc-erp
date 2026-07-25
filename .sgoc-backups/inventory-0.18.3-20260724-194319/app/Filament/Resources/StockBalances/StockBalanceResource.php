@@ -1,0 +1,8 @@
+<?php
+declare(strict_types=1);
+namespace App\Filament\Resources\StockBalances;
+use App\Filament\Resources\StockBalances\Pages\ListStockBalances; use App\Modules\Inventory\Domain\Models\StockBalance; use BackedEnum; use UnitEnum; use Filament\Resources\Resource; use Filament\Schemas\Schema; use Filament\Tables\Table; use Filament\Tables\Columns\TextColumn;
+final class StockBalanceResource extends Resource { protected static ?string $model=StockBalance::class; protected static ?string $modelLabel='Saldo de estoque'; protected static ?string $pluralModelLabel='Saldos de estoque'; protected static ?string $navigationLabel='Saldos de estoque'; protected static string|UnitEnum|null $navigationGroup='Estoque e Almoxarifado'; protected static string|BackedEnum|null $navigationIcon='heroicon-o-cube';
+ public static function form(Schema $schema): Schema { return $schema; }
+ public static function table(Table $table): Table { return $table->columns([TextColumn::make('warehouse.name')->label('Almoxarifado')->searchable(),TextColumn::make('product.name')->label('Produto')->searchable(),TextColumn::make('lot_number')->label('Lote'),TextColumn::make('quantity_on_hand')->label('Saldo físico')->numeric(decimalPlaces:4),TextColumn::make('quantity_reserved')->label('Reservado')->numeric(decimalPlaces:4),TextColumn::make('available_quantity')->label('Disponível')->state(fn (StockBalance $record): float => (float)$record->quantity_on_hand-(float)$record->quantity_reserved)->numeric(decimalPlaces:4),TextColumn::make('average_cost')->label('Custo médio')->money('BRL',locale:'pt_BR')]); }
+ public static function canCreate(): bool { return false; } public static function getPages(): array { return ['index'=>ListStockBalances::route('/')]; } }

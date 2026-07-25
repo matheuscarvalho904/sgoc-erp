@@ -58,7 +58,7 @@ final class PurchaseOrderResource extends Resource
                         'draft'=>'Rascunho','approved'=>'Aprovado','issued'=>'Emitido','partially_received'=>'Recebido parcialmente','received'=>'Recebido','cancelled'=>'Cancelado',
                     ]),
                     Select::make('organization_id')->label('Organização')->options(fn()=>Organization::query()->pluck('name','id')->all())->searchable()->preload()->required(),
-                    Select::make('company_id')->label('Empresa')->options(fn()=>Company::query()->pluck('trade_name','id')->all())->searchable()->preload()->required(),
+                    Select::make('company_id')->label('Empresa')->options(fn()=>Company::query()->orderBy('name')->pluck('name','id')->all())->searchable()->preload()->required(),
                     Select::make('branch_id')->label('Filial')->options(fn()=>Branch::query()->pluck('name','id')->all())->searchable()->preload()->required(),
                     Select::make('supplier_id')->label('Fornecedor')->options(fn()=>Supplier::query()->orderBy('trade_name')->pluck('trade_name','id')->all())->searchable()->preload()->required(),
                     Select::make('work_id')->label('Obra')->options(fn()=>Work::query()->pluck('name','id')->all())->searchable()->preload(),

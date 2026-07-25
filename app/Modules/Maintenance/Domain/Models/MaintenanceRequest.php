@@ -6,10 +6,10 @@ namespace App\Modules\Maintenance\Domain\Models;
 
 use App\Models\User;
 use App\Modules\Assets\Domain\Models\Asset;
-use App\Shared\Models\BaseModel;
+use App\Shared\Models\TransactionModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-final class MaintenanceRequest extends BaseModel
+final class MaintenanceRequest extends TransactionModel
 {
     protected $table = 'maintenance.requests';
     protected $guarded = [];

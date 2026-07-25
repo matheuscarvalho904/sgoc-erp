@@ -8,6 +8,7 @@ use App\Filament\Resources\Suppliers\Pages\{CreateSupplier, EditSupplier, ListSu
 use App\Modules\Purchasing\Domain\Models\Supplier;
 use App\Modules\Foundation\Domain\Models\{Organization, Tenant};
 use App\Services\BrazilianDocumentLookupService;
+use App\Support\Filament\BrazilianInput;
 use BackedEnum;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\{Hidden, Select, Textarea, TextInput};
@@ -44,17 +45,17 @@ final class SupplierResource extends Resource
                     Grid::make(['default'=>1,'md'=>2,'xl'=>4])->schema([
                         TextInput::make('code')->label('Código')->required()->maxLength(30),
                         Select::make('person_type')->label('Tipo de pessoa')->options(['company'=>'Pessoa jurídica','individual'=>'Pessoa física'])->default('company')->live()->required(),
-                        TextInput::make('document')->label(fn (callable $get) => $get('person_type') === 'individual' ? 'CPF' : 'CNPJ')->placeholder('00.000.000/0000-00')->maxLength(18)->unique(ignoreRecord:true)->live(onBlur:true)
+                        BrazilianInput::cpfCnpj('document')->label(fn (callable $get) => $get('person_type') === 'individual' ? 'CPF' : 'CNPJ')->placeholder('00.000.000/0000-00')->maxLength(18)->unique(ignoreRecord:true)->live(onBlur:true)
                             ->afterStateUpdated(fn (?string $state, callable $set, callable $get) => self::lookupCnpj($state,$set,$get)),
                         Select::make('status')->label('Status')->options(['active'=>'Ativo','inactive'=>'Inativo','blocked'=>'Bloqueado'])->default('active')->required(),
                         TextInput::make('legal_name')->label(fn (callable $get) => $get('person_type') === 'individual' ? 'Nome completo' : 'Razão social')->columnSpan(2)->required(),
                         TextInput::make('trade_name')->label(fn (callable $get) => $get('person_type') === 'individual' ? 'Nome de exibição' : 'Nome fantasia')->columnSpan(2)->required(),
                         TextInput::make('state_registration')->label('Inscrição estadual'), TextInput::make('municipal_registration')->label('Inscrição municipal'),
-                        TextInput::make('email')->label('E-mail')->email(), TextInput::make('phone')->label('Telefone')->tel(),
+                        TextInput::make('email')->label('E-mail')->email(), BrazilianInput::phone('phone')->label('Telefone'),
                     ]),
                 ]),
                 Tab::make('Endereço')->schema([Section::make('Localização')->columns(12)->schema([
-                    TextInput::make('zip_code')->label('CEP')->placeholder('00000-000')->maxLength(9)->columnSpan(2)->live(onBlur:true)->afterStateUpdated(fn (?string $state, callable $set, callable $get) => self::lookupCep($state,$set,$get)),
+                    BrazilianInput::cep('zip_code')->label('CEP')->columnSpan(2)->live(onBlur:true)->afterStateUpdated(fn (?string $state, callable $set, callable $get) => self::lookupCep($state,$set,$get)),
                     TextInput::make('street')->label('Logradouro')->columnSpan(5), TextInput::make('number')->label('Número')->columnSpan(2), TextInput::make('complement')->label('Complemento')->columnSpan(3),
                     TextInput::make('district')->label('Bairro')->columnSpan(3), TextInput::make('city')->label('Cidade')->columnSpan(5), TextInput::make('state')->label('UF')->maxLength(2)->columnSpan(2),
                 ])]),

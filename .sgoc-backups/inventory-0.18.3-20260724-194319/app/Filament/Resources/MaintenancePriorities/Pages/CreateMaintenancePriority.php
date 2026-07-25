@@ -1,0 +1,1 @@
+<?php namespace App\Filament\Resources\MaintenancePriorities\Pages; use App\Filament\Resources\MaintenancePriorities\MaintenancePriorityResource; use Filament\Resources\Pages\CreateRecord; final class CreateMaintenancePriority extends CreateRecord { protected static string $resource=MaintenancePriorityResource::class; }

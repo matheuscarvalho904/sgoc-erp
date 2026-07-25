@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Modules\Purchasing\Domain\Models;
 
 use App\Modules\Foundation\Domain\Models\Tenant;
-use App\Shared\Models\BaseModel;
+use App\Shared\Models\TransactionModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-final class QuotationSupplier extends BaseModel
+final class QuotationSupplier extends TransactionModel
 {
     protected $table = 'purchasing.quotation_suppliers';
     protected $fillable = ['tenant_id','quotation_request_id','supplier_id','status','proposal_number','proposal_date','validity_date','delivery_days','freight_amount','discount_amount','other_amount','payment_terms','notes','attachment_path','subtotal','total_amount','is_winner','responded_at'];

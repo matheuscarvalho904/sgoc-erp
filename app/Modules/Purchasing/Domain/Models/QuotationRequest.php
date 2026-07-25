@@ -6,11 +6,11 @@ namespace App\Modules\Purchasing\Domain\Models;
 
 use App\Models\User;
 use App\Modules\Foundation\Domain\Models\Tenant;
-use App\Shared\Models\BaseModel;
+use App\Shared\Models\TransactionModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-final class QuotationRequest extends BaseModel
+final class QuotationRequest extends TransactionModel
 {
     protected $table = 'purchasing.quotation_requests';
     protected $fillable = ['tenant_id','purchase_request_id','number','issued_at','response_deadline','status','notes','created_by','closed_at'];

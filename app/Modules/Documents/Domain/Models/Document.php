@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Modules\Documents\Domain\Models;
 
-use App\Shared\Models\BaseModel;
+use App\Shared\Models\TransactionModel;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-final class Document extends BaseModel
+final class Document extends TransactionModel
 {
     protected $table = 'documents.documents';
     protected $guarded = [];

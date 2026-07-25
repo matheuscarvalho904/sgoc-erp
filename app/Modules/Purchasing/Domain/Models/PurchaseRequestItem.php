@@ -6,10 +6,10 @@ namespace App\Modules\Purchasing\Domain\Models;
 
 use App\Modules\Catalog\Domain\Models\{Product, Unit};
 use App\Modules\Foundation\Domain\Models\Tenant;
-use App\Shared\Models\BaseModel;
+use App\Shared\Models\TransactionModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-final class PurchaseRequestItem extends BaseModel
+final class PurchaseRequestItem extends TransactionModel
 {
     protected $table = 'purchasing.purchase_request_items';
 

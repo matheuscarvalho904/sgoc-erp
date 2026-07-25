@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Modules\Maintenance\Domain\Models;
 
 use App\Modules\Assets\Domain\Models\Asset;
-use App\Shared\Models\BaseModel;
+use App\Shared\Models\TransactionModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-final class WorkOrder extends BaseModel
+final class WorkOrder extends TransactionModel
 {
     protected $table = 'maintenance.work_orders';
 

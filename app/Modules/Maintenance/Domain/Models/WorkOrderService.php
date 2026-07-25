@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Modules\Maintenance\Domain\Models;
 
-use App\Shared\Models\BaseModel;
+use App\Shared\Models\TransactionModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-final class WorkOrderService extends BaseModel
+final class WorkOrderService extends TransactionModel
 {
     protected $table = 'maintenance.work_order_services';
 

@@ -8,6 +8,7 @@ use App\Filament\Resources\Assets\Pages\{CreateAsset, EditAsset, ListAssets};
 use App\Modules\Assets\Domain\Models\{Asset, AssetCategory, AssetPrefix, AssetType, Fuel};
 use App\Modules\Catalog\Domain\Models\Brand;
 use App\Modules\Foundation\Domain\Models\{Branch, Company, CostCenter, Department, Organization, Tenant, Work};
+use App\Support\Filament\BrazilianInput;
 use BackedEnum;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\{DatePicker, Hidden, Select, Textarea, TextInput};
@@ -46,11 +47,11 @@ final class AssetResource extends Resource
                         Select::make('brand_id')->label('Marca')->options(fn()=>Brand::query()->where('status','active')->orderBy('name')->pluck('name','id'))->searchable()->preload(),
                         TextInput::make('model')->label('Modelo'),
                         TextInput::make('manufacture_year')->label('Ano fabricação')->numeric(), TextInput::make('model_year')->label('Ano modelo')->numeric(),
-                        TextInput::make('plate')->label('Placa'), TextInput::make('patrimony_number')->label('Patrimônio'),
+                        BrazilianInput::plate()->label('Placa'), TextInput::make('patrimony_number')->label('Patrimônio'),
                     ]),
                 ]),
                 Tab::make('Documentação')->schema([Grid::make(['default'=>1,'md'=>2,'xl'=>4])->schema([
-                    TextInput::make('renavam')->label('RENAVAM'), TextInput::make('chassis')->label('Chassi')->columnSpan(2), TextInput::make('serial_number')->label('Número de série'),
+                    BrazilianInput::renavam()->label('RENAVAM'), BrazilianInput::chassis()->label('Chassi')->columnSpan(2), TextInput::make('serial_number')->label('Número de série'),
                     DatePicker::make('warranty_until')->label('Garantia até'),
                 ])]),
                 Tab::make('Alocação')->schema([Grid::make(['default'=>1,'md'=>2,'xl'=>3])->schema([
@@ -66,12 +67,12 @@ final class AssetResource extends Resource
                     Select::make('operational_status')->label('Situação operacional')->options(['operating'=>'Operando','maintenance'=>'Em manutenção','stopped'=>'Parado','rented'=>'Locado','available'=>'Disponível','disposed'=>'Baixado','sold'=>'Vendido'])->default('available')->required(),
                     Select::make('meter_type')->label('Medidor')->options(['none'=>'Nenhum','odometer'=>'Hodômetro','hourmeter'=>'Horímetro','both'=>'Ambos'])->default('none')->required(),
                     Select::make('fuel_id')->label('Combustível')->options(fn()=>Fuel::query()->where('status','active')->orderBy('name')->pluck('name','id'))->searchable()->preload(),
-                    TextInput::make('current_odometer')->label('Hodômetro atual')->numeric()->default(0), TextInput::make('current_hourmeter')->label('Horímetro atual')->numeric()->default(0),
+                    BrazilianInput::decimal('current_odometer', 3)->label('Hodômetro atual')->default(0), BrazilianInput::decimal('current_hourmeter', 3)->label('Horímetro atual')->default(0),
                     TextInput::make('tank_capacity')->label('Capacidade do tanque')->numeric()->suffix('L'), TextInput::make('expected_consumption')->label('Consumo previsto')->numeric(),
                 ])]),
                 Tab::make('Financeiro')->schema([Grid::make(['default'=>1,'md'=>2,'xl'=>4])->schema([
                     DatePicker::make('acquisition_date')->label('Data de aquisição'), TextInput::make('acquisition_value')->label('Valor de aquisição')->numeric()->prefix('R$')->default(0),
-                    TextInput::make('residual_value')->label('Valor residual')->numeric()->prefix('R$')->default(0), TextInput::make('useful_life_months')->label('Vida útil')->numeric()->suffix('meses'),
+                    BrazilianInput::money('residual_value')->label('Valor residual')->default(0), TextInput::make('useful_life_months')->label('Vida útil')->numeric()->suffix('meses'),
                 ])]),
                 Tab::make('Observações')->schema([Textarea::make('notes')->label('Observações')->rows(7), Select::make('status')->label('Status do cadastro')->options(['active'=>'Ativo','inactive'=>'Inativo'])->default('active')->required()]),
             ]),

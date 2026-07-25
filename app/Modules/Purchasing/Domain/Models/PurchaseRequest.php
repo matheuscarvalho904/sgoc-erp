@@ -11,11 +11,11 @@ use App\Modules\Foundation\Domain\Models\CostCenter;
 use App\Modules\Foundation\Domain\Models\Organization;
 use App\Modules\Foundation\Domain\Models\Tenant;
 use App\Modules\Foundation\Domain\Models\Work;
-use App\Shared\Models\BaseModel;
+use App\Shared\Models\TransactionModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-final class PurchaseRequest extends BaseModel
+final class PurchaseRequest extends TransactionModel
 {
     protected $table = 'purchasing.purchase_requests';
 

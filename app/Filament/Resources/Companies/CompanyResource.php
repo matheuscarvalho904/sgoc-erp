@@ -11,6 +11,7 @@ use App\Modules\Foundation\Domain\Models\Company;
 use App\Modules\Foundation\Domain\Models\Organization;
 use App\Modules\Foundation\Domain\Models\Tenant;
 use App\Services\BrazilianDocumentLookupService;
+use App\Support\Filament\BrazilianInput;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -58,7 +59,7 @@ final class CompanyResource extends Resource
                         ->schema([
                             Grid::make(['default' => 1, 'md' => 2, 'xl' => 4])
                                 ->schema([
-                                    TextInput::make('document')
+                                    BrazilianInput::cnpj('document')
                                         ->label('CNPJ')
                                         ->placeholder('00.000.000/0000-00')
                                         ->helperText('Informe o CNPJ e saia do campo para consultar.')
@@ -135,7 +136,7 @@ final class CompanyResource extends Resource
                                 ->columns(['default' => 1, 'md' => 2, 'xl' => 3])
                                 ->schema([
                                     TextInput::make('email')->label('E-mail')->email()->maxLength(180),
-                                    TextInput::make('phone')->label('Telefone')->tel()->maxLength(30),
+                                    BrazilianInput::phone('phone')->label('Telefone'),
                                     TextInput::make('site')->label('Site')->url()->maxLength(180),
                                 ]),
 

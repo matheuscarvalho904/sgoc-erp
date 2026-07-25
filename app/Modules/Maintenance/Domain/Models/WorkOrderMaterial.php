@@ -6,10 +6,10 @@ namespace App\Modules\Maintenance\Domain\Models;
 
 use App\Modules\Catalog\Domain\Models\Product;
 use App\Modules\Catalog\Domain\Models\Unit;
-use App\Shared\Models\BaseModel;
+use App\Shared\Models\TransactionModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-final class WorkOrderMaterial extends BaseModel
+final class WorkOrderMaterial extends TransactionModel
 {
     protected $table = 'maintenance.work_order_materials';
 
