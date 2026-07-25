@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Fuel\Application\Services;
 
 use App\Modules\Assets\Domain\Models\Asset;
-use App\Modules\Fuel\Domain\Models\{FuelEntry, Fueling, FuelStockBalance, FuelStockMovement};
+use App\Modules\Fuel\Domain\Models\{FuelEntry, Fueling, FuelPump, FuelStockBalance, FuelStockMovement, FuelStorage};
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -14,6 +14,9 @@ final class FuelTransactionService
     public function postEntry(FuelEntry $entry): void
     {
         DB::transaction(function () use ($entry): void {
+            if ((float) $entry->quantity_liters <= 0 || (float) $entry->unit_cost <= 0) {
+                throw ValidationException::withMessages(['quantity_liters' => 'Quantidade e custo unitário devem ser maiores que zero.']);
+            }
             $balance = FuelStockBalance::query()->lockForUpdate()->firstOrCreate(
                 ['storage_id' => $entry->storage_id, 'fuel_id' => $entry->fuel_id],
                 ['tenant_id' => $entry->tenant_id, 'quantity_liters' => 0, 'average_cost' => 0, 'total_value' => 0]
@@ -54,6 +57,14 @@ final class FuelTransactionService
     public function postFueling(Fueling $fueling): void
     {
         DB::transaction(function () use ($fueling): void {
+            $storage = FuelStorage::query()->findOrFail($fueling->storage_id);
+            if ($storage->status !== 'active') { throw ValidationException::withMessages(['storage_id' => 'O ponto de combustível está inativo.']); }
+            if ($storage->default_fuel_id && $storage->default_fuel_id !== $fueling->fuel_id) { throw ValidationException::withMessages(['fuel_id' => 'Combustível incompatível com o ponto selecionado.']); }
+            if ($fueling->pump_id) { $pump = FuelPump::query()->find($fueling->pump_id); if (! $pump || $pump->status !== 'active') { throw ValidationException::withMessages(['pump_id' => 'A bomba está inativa ou indisponível.']); } }
+            if ((float) $fueling->quantity_liters <= 0) { throw ValidationException::withMessages(['quantity_liters' => 'A quantidade deve ser maior que zero.']); }
+            if ($fueling->meter_reading !== null && $fueling->previous_meter_reading !== null && (float)$fueling->meter_reading < (float)$fueling->previous_meter_reading) { throw ValidationException::withMessages(['meter_reading' => 'A leitura atual não pode ser menor que a leitura anterior.']); }
+            $duplicate = Fueling::query()->where('asset_id',$fueling->asset_id)->where('storage_id',$fueling->storage_id)->where('quantity_liters',$fueling->quantity_liters)->whereBetween('fueled_at',[$fueling->fueled_at->copy()->subMinutes(2),$fueling->fueled_at->copy()->addMinutes(2)])->whereKeyNot($fueling->id)->exists();
+            if ($duplicate) { throw ValidationException::withMessages(['quantity_liters' => 'Possível abastecimento duplicado detectado.']); }
             $balance = FuelStockBalance::query()->lockForUpdate()
                 ->where('storage_id', $fueling->storage_id)
                 ->where('fuel_id', $fueling->fuel_id)
@@ -109,6 +120,8 @@ final class FuelTransactionService
                 'occurred_at' => $fueling->fueled_at,
                 'notes' => $fueling->notes,
             ]);
+
+            app(FuelAlertService::class)->evaluate($fueling->fresh());
         });
     }
 }

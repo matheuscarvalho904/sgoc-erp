@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Filament\Pages;
 
 use App\Filament\Widgets\ExecutiveOverview;
+use App\Filament\Widgets\FuelOverview;
+use App\Filament\Widgets\FuelConsumptionChart;
 use App\Filament\Widgets\RecentWorks;
 use App\Filament\Widgets\WorksStatusChart;
 use BackedEnum;
@@ -21,6 +23,8 @@ final class Dashboard extends BaseDashboard
     {
         return [
             ExecutiveOverview::class,
+            FuelOverview::class,
+            FuelConsumptionChart::class,
             WorksStatusChart::class,
             RecentWorks::class,
         ];
